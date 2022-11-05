@@ -159,7 +159,7 @@ void Draw(){
 	}
 	
 	RectMode("ALIGN");
-	if(noClip) canvas.rect(1,1,50,50,{0,0,(uni)255});
+	if(noClip) canvas.rect(1,1,50,50,{0,(uni)100,(uni)255});
 	if(run) canvas.rect(60,1,50,50,{0,(uni)255,0});
 	
 	canvas.Export(outStr,"path");
@@ -231,7 +231,7 @@ int main(){
 	
 	Setup(inStr);
 	fov %= 360;
-	mode = 0;
+	mode = 1;
 	camR = 130.0;
 	
 	for(ll t=0;;t++){
