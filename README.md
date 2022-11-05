@@ -1,11 +1,6 @@
 # C-Bitmap-Raycaster
 A C++ implementation of a raycaster using bitmap images
 
-To-do : 
-* add control explanation
-* add input/output explanation
-* add code explanation
-
 ## Overview
 This is a project of creating a raycaster similar to the one used in Wolfenstein 3D. All of the code(main.cpp, bmputil.h) and the folders(input, output, screenshots) must be included in the same relative positions for the code to properly work. Please note that all explenation here assumes your using windows.
 
@@ -48,3 +43,6 @@ View modes:
 Noclip: By default, you can't walk through walls, however by enabling noclip you can. There will be a small blue square in the bottom-left corner of the output if noclip is enabled.
 
 Run: You move more every step. There will be a small green square in the bottom-left corner if running is enabled.
+
+## How it Works
+To be added
