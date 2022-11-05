@@ -210,7 +210,7 @@ void Move(char x){
 	else if(x=='1') mode = 1;
 	else if(x=='2') mode = 2;
 	else if(x=='3') mode = 3;
-	else if(x=='`') noClip = !noClip;
+	else if(x=='c') noClip = !noClip;
 	else if(x=='r') run = !run;
 	else if(x=='f'){
 		name = screenStr;
