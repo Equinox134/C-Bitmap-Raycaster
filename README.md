@@ -48,22 +48,22 @@ Run: You move more every step. There will be a small green square in the bottom-
 
 ## Commands
 Here are all the commands in the program. Curly brackets{} mean to type in words, square brackets[] mean to type in numbers. Commands with different modes have the modes listed beneath them. If you written the mode a wrong way, type any key the number of parameters written after the mode name. This should make everything work normaly.
-* help: prints list of controls
-* list: prints list of commands
-* camloc {mode} [x] [y]: changes camera location, [x] and [y] are floats
-	* add: adds [x], [y] to current cameras x and y positions
-	* set: sets camera positions to ([x], [y])
-* camrot {mode} [r]: changes camera rotation, [r] is a float
-	* add: adds [r] degrees to current camera rotation
-	* set: sets camera rotation to [r] degrees
-* floorcl [r] [g] [b]: change floor color to {[r], [g], [b]}, [r]~[b] are integers
-* skycl {mode} [r1] [g1] [b1] [r2] [g2] [b2]: changes sky color, [r1]~[b2] are integers
-	* solid: sets sky color to {[r1], [g1], [b1]}; [r2], [g2], [b2] are ignored
-	* gradient: sets sky color to a gradient, color changes from {[r1], [g1], [b1]} to {[r2], [g2], [b2]}
-* fov {mode} [f]: changes camera FOV, [f] is an integer
-	* add: adds [f] to current camera FOV
-	* set: sets camera FOV to [f]
-* res [x] [y]: sets output image size to [x] pixels by [y] pixels, [x] and [y] are integers
+* `help`: prints list of controls
+* `list`: prints list of commands
+* `camloc {mode} [x] [y]`: changes camera location, `[x]` and `[y]` are floats
+	* add: adds `[x]`, `[y]` to current cameras x and y positions
+	* set: sets camera positions to `([x], [y])`
+* `camrot {mode} [r]`: changes camera rotation, `[r]` is a float
+	* add: adds `[r]` degrees to current camera rotation
+	* set: sets camera rotation to `[r]` degrees
+* `floorcl [r] [g] [b]`: change floor color to `{[r], [g], [b]}`, `[r]`~`[b]` are integers
+* `skycl {mode} [r1] [g1] [b1] [r2] [g2] [b2]`: changes sky color, `[r1]`~`[b2]` are integers
+	* solid: sets sky color to `{[r1], [g1], [b1]}`; do not input `[r2]`~`[b2]`
+	* gradient: sets sky color to a gradient, color changes from `{[r1], [g1], [b1]}` to `{[r2], [g2], [b2]}`
+* `fov {mode} [f]`: changes camera FOV, `[f]` is an integer
+	* add: adds `[f]` to current camera FOV
+	* set: sets camera FOV to `[f]`
+* `res [x] [y]`: sets output image size to `[x]` pixels by `[y]` pixels, `[x]` and `[y]` are integers
 
 ## How it Works
 To be added
