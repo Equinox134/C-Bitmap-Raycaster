@@ -14,7 +14,9 @@ typedef unsigned char uni;
 
 ll w, h, outW = 1000, outH = 1000;
 double camX, camY, camR = 0.0, speed = 1, rspeed = 2, rs = 5, darkr = 0.7;
-int fov = 60, mode = 0, noClip = 0, run = 0;
+int fov = 60, mode = 1, noClip = 0, run = 0;
+Color flCol = {(uni)170,(uni)170,(uni)170};
+Color sbCol = {(uni)66,(uni)225,(uni)255}, stCol = {(uni)255,(uni)255,(uni)255};
 vector<vector<int> > board;
 vector<vector<Color> > colData;
 string inStr, outStr, screenStr;
@@ -121,6 +123,10 @@ vector<Ray> Raycast(){
 
 void Draw(){
 	canvas = Canvas(outW, outH);
+	
+	canvas.rect(0,0,outW,outH/2,flCol);
+	canvas.Gradient(0,outH-outH/2,outW,outH-outH/2,sbCol,stCol);
+	
 	RectMode("CENTER");
 	
 	vector<Ray> rays = Raycast();
@@ -154,8 +160,11 @@ void Draw(){
 			tmp = {(uni)r,(uni)g,(uni)b};
 		}
 		
+		double wid = 1.0*outW/sz;
+		double xpos = 1.0*wid*(2*i+1)/2;
+		
 		//cout << (int)(outH/dist[i]) << "\n";
-		canvas.rect(outW/sz+outW/sz*i,outH/2,outW/sz,(int)(outH/dist),tmp);
+		canvas.rect((int)xpos,outH/2,(int)wid+1,(int)(outH/dist),tmp);
 	}
 	
 	RectMode("ALIGN");
@@ -180,28 +189,135 @@ int Check(double a, double b){
 	return !board[mx][my];
 }
 
+int CheckIn(double a, double b){
+	if(a<0||b<0||a>=w||b>=h) return 0;
+	else return 1;
+}
+
+int ColVal(int r, int g, int b){
+	return !(r>255||g>255||b>255||r<0||b<0||g<0);
+}
+
+void Command(string cmd){
+	if(cmd=="camloc"){
+		string mmode; cin >> mmode;
+		double xp,yp,nx,ny; cin >> xp >> yp;
+		if(mmode=="add"){nx=camX+xp;ny=camY+yp;}
+		else if(mmode=="set"){nx=xp;ny=yp;}
+		else{
+			cout << "Invalid mode inputed!\n";
+			return;
+		}
+		
+		if(!CheckIn(nx,ny)) cout << "Inputed Location is out of bounds!\n";
+		else if(!noClip&&!Check(nx,ny)){
+			cout << "Inputed Location is inside a wall!\n";
+			cout << "Turn on noclip(c) to move inside wall\n";
+		}
+		else{
+			camX = nx, camY = ny;
+			cout << "Changed camera location to: " << nx << " " << ny << "\n";
+		}
+	}
+	else if(cmd=="camrot"){
+		string rmode; cin >> rmode;
+		double rt,nr; cin >> rt;
+		if(rmode=="add") nr = rt+camR;
+		else if(rmode=="set") nr = rt;
+		else{
+			cout << "Invalid mode inputed!\n";
+			return;
+		}
+		
+		camR = nr;
+		cout << "Changed camera rotation to: " << nr << "\n";
+	}
+	else if(cmd=="floorcl"){
+		int r,g,b; cin >> r >> g >> b;
+		if(!ColVal(r,g,b)) cout << "Invalid RGB values!\n";
+		else{
+			flCol = {(uni)r,(uni)g,(uni)b};
+			cout << "Changed floor color to: {" << r << "," << g << "," << b << "}\n";
+		}
+	}
+	else if(cmd=="skycl"){
+		string smode; cin >> smode;
+		if(smode=="solid"){
+			int r,g,b; cin >> r >> g >> b;
+			if(!ColVal(r,g,b)) cout << "Invalid RGB values!\n";
+			else{
+				sbCol = {(uni)r,(uni)g,(uni)b};
+				stCol = sbCol;
+				cout << "Changed sky color to: {" << r << "," << g << "," << b << "}\n";
+			}
+		}
+		else if(smode=="grad"){
+			int r1,g1,b1; cin >> r1 >> g1 >> b1;
+			int r2,g2,b2; cin >> r2 >> g2 >> b2;
+			if(!ColVal(r1,g1,b1)||!ColVal(r2,g2,b2)) cout << "Invalid RGB values!\n";
+			else{
+				sbCol = {(uni)r1,(uni)g1,(uni)b1};
+				stCol = {(uni)r2,(uni)g2,(uni)b2};
+				cout << "Changed sky color to: ";
+				cout << "{" << r1 << "," << g1 << "," << b1 << "} to ";
+				cout << "{" << r2 << "," << g2 << "," << b2 << "}\n";
+			}
+		}
+		else{
+			cout << "Invalid mode inputed!\n";
+			return;
+		}
+	}
+	else if(cmd=="fov"){
+		string fmode; cin >> fmode;
+		int fd,nf; cin >> fd;
+		if(fmode=="add") nf = (fov+fd)%360;
+		else if(fmode=="set") nf = fd%360;
+		else{
+			cout << "Invalid mode inputed!\n";
+			return;
+		}
+		
+		fov = nf;
+		cout << "Changed camera FOV to: " << nf << "\n";
+	}
+	else if(cmd=="res"){
+		int x,y; cin >> x >> y;
+		if(x<200||y<200) cout << "Too small! Width and height must be at least 200 pixels\n";
+		else{
+			outW = x, outH = y;
+			cout << "Changed output resolution to: " << x << " pixels * " << y << " pixels\n";
+		}
+	}
+}
+
 void Move(char x){
 	string name;
 	double r = camR*PI/180;
+	double cs = cos(r), sn = sin(r);
 	if(x=='w'){
-		if(!noClip&&!Check(camX+speed*cos(r),camY+speed*sin(r))) return;
-		camX += speed*cos(r);
-		camY += speed*sin(r);
+		if(!noClip&&!Check(camX+speed*cs,camY+speed*sn)) return;
+		if(!CheckIn(camX+speed*cs,camY+speed*sn)) return;
+		camX += speed*cs;
+		camY += speed*sn;
 	}
 	else if(x=='s'){
-		if(!noClip&&!Check(camX-speed*cos(r),camY-speed*sin(r))) return;
-		camX -= speed*cos(r);
-		camY -= speed*sin(r);
+		if(!noClip&&!Check(camX-speed*cs,camY-speed*sn)) return;
+		if(!CheckIn(camX-speed*cs,camY-speed*sn)) return;
+		camX -= speed*cs;
+		camY -= speed*sn;
 	}
 	else if(x=='d'){
-		if(!noClip&&!Check(camX-speed*sin(r),camY+speed*cos(r))) return;
-		camX -= speed*sin(r);
-		camY += speed*cos(r);
+		if(!noClip&&!Check(camX-speed*sn,camY+speed*cs)) return;
+		if(!CheckIn(camX-speed*sn,camY+speed*cs)) return;
+		camX -= speed*sn;
+		camY += speed*cs;
 	}
 	else if(x=='a'){
-		if(!noClip&&!Check(camX+speed*sin(r),camY-speed*cos(r))) return;
-		camX += speed*sin(r);
-		camY -= speed*cos(r);
+		if(!noClip&&!Check(camX+speed*sn,camY-speed*cs)) return;
+		if(!CheckIn(camX+speed*sn,camY-speed*cs)) return;
+		camX += speed*sn;
+		camY -= speed*cs;
 	}
 	else if(x=='q') camR -= rs;
 	else if(x=='e') camR += rs;
@@ -210,7 +326,10 @@ void Move(char x){
 	else if(x=='1') mode = 1;
 	else if(x=='2') mode = 2;
 	else if(x=='3') mode = 3;
-	else if(x=='c') noClip = !noClip;
+	else if(x=='c'){
+		if(noClip&&!Check(camX,camY)) return;
+		noClip = !noClip;
+	}
 	else if(x=='r') run = !run;
 	else if(x=='f'){
 		name = screenStr;
@@ -219,8 +338,13 @@ void Move(char x){
 		canvas.Export(name,"path");
 	}
 	else if(x==' ') camR += 180;
+	else if(x=='/'){
+		cout << "\n";
+		cout << ">> ";
+		string cmd; cin >> cmd;
+		Command(cmd);
+	}
 	else if(x=='x'){
-		cout << camX << " " << camY << " " << camR;
 		exit(0);
 	}
 }
@@ -230,15 +354,30 @@ int main(){
 	outStr = "Output\\output.bmp";
 	screenStr = "Output\\Screenshots\\screenshot";
 	
+	cout<<" *******       **     **    **   ******      **      ******** ********** ******** *******                        \n";
+	cout<<"/**////**     ****   //**  **   **////**    ****    **////// /////**/// /**///// /**////**       *          *    \n";
+	cout<<"/**   /**    **//**   //****   **    //    **//**  /**           /**    /**      /**   /**      /*         /*    \n";
+	cout<<"/*******    **  //**   //**   /**         **  //** /*********    /**    /******* /*******    *********  *********\n";
+	cout<<"/**///**   **********   /**   /**        **********////////**    /**    /**////  /**///**   /////*///  /////*/// \n";
+	cout<<"/**  //** /**//////**   /**   //**    **/**//////**       /**    /**    /**      /**  //**      /*         /*    \n";
+	cout<<"/**   //**/**     /**   /**    //****** /**     /** ********     /**    /********/**   //**     /          /     \n";
+	cout<<"//     // //      //    //      //////  //      // ////////      //     //////// //     //                       \n\n";
+	
+	cout<<"A C++ bitmap raycaster project by gs22123\n\n";
+	cout<<"Type /help for a list of controls and commands\n\n\n\n";
+	
 	Setup(inStr);
 	fov %= 360;
 	mode = 1;
 	camR = 130.0;
 	
+	cout << "X: " << camX << " Y: " << camY << " Rot: " << camR << " FOV: " << fov << "\r";
 	for(ll t=0;;t++){
 		Draw();
 		char x = getch();
 		Move(x);
-		cout << "done " << t << "\r";
+		
+		cout.precision(3); cout << fixed;
+		cout << "X: " << camX << " Y: " << camY << " Rot: " << camR << " FOV: " << fov << "\r";
 	}
 }
