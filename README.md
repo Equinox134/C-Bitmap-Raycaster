@@ -47,7 +47,7 @@ Noclip: By default, you can't walk through walls, however by enabling noclip you
 Run: You move more every step. There will be a small green square in the bottom-left corner if running is enabled.
 
 ## Commands
-Here are all the commands in the program. Curly brackets{} mean to type in words, square brackets[] mean to type in numbers. Commands with different modes have the modes listed beneath them.
+Here are all the commands in the program. Curly brackets{} mean to type in words, square brackets[] mean to type in numbers. Commands with different modes have the modes listed beneath them. If you written the mode a wrong way, type any key the number of parameters written after the mode name. This should make everything work normaly.
 * help: prints list of controls
 * list: prints list of commands
 * camloc {mode} [x] [y]: changes camera location, [x] and [y] are floats
