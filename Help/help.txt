@@ -1,0 +1,11 @@
+Controls:
+w, a, s, d: move forward, left, backward, right
+e, q: turn camera left, right
+SHIFT + e,q: turn camera left, right by alot
+1, 2, 3: change view mode
+c: enable/disable noclip mode
+r: enable/disable run
+f: take screenshot
+SPACE: turn camera by 180 degrees
+/: enable command console, type /list for a list of commands
+x: exit program

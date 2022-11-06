@@ -1,0 +1,21 @@
+Commands:
+help: prints list of controls
+list: prints list of commands
+camloc {mode} [x] [y]: changes camera location
+	modes:
+	add: adds [x], [y] to current cameras x and y positions
+	set: sets camera positions to ([x], [y])
+camrot {mode} [r]: changes camera rotation
+	modes:
+	add: adds [r] degrees to current camera rotation
+	set: sets camera rotation to [r] degrees
+floorcl [r] [g] [b]: change floor color to {[r], [g], [b]}
+skycl {mode} [r1] [g1] [b1] [r2] [g2] [b2]: changes sky color
+	modes:
+	solid: sets sky color to {[r1], [g1], [b1]}; [r2], [g2], [b2] are ignored
+	gradient: sets sky color to a gradient, color changes from {[r1], [g1], [b1]} to {[r2], [g2], [b2]}
+fov {mode} [f]: changes camera FOV
+	modes:
+	add: adds [f] to current camera FOV
+	set: sets camera FOV to [f]
+res [x] [y]: sets output image resolution to [x] pixels by [y] pixels
