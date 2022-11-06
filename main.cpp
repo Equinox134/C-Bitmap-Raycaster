@@ -1,5 +1,6 @@
 #include <cstdio>
 #include <iostream>
+#include <fstream>
 #include <conio.h>
 #include <ctime>
 #include <cmath>
@@ -19,7 +20,7 @@ Color flCol = {(uni)170,(uni)170,(uni)170};
 Color sbCol = {(uni)66,(uni)225,(uni)255}, stCol = {(uni)255,(uni)255,(uni)255};
 vector<vector<int> > board;
 vector<vector<Color> > colData;
-string inStr, outStr, screenStr;
+string inStr, outStr, screenStr, helpStr, listStr;
 
 Canvas canvas = Canvas(100,100);
 
@@ -198,8 +199,30 @@ int ColVal(int r, int g, int b){
 	return !(r>255||g>255||b>255||r<0||b<0||g<0);
 }
 
+void Help(){
+	cout<<"\n\n";
+	ifstream help(helpStr);
+	string hlp;
+	while(getline(help,hlp)){
+		cout << hlp << "\n";
+	}
+	cout<<"\n\n";
+}
+
+void List(){
+	cout<<"\n\n";
+	ifstream lis(listStr);
+	string ls;
+	while(getline(lis,ls)){
+		cout << ls << "\n";
+	}
+	cout<<"\n\n";
+}
+
 void Command(string cmd){
-	if(cmd=="camloc"){
+	if(cmd=="help") Help();
+	else if(cmd=="list") List();
+	else if(cmd=="camloc"){
 		string mmode; cin >> mmode;
 		double xp,yp,nx,ny; cin >> xp >> yp;
 		if(mmode=="add"){nx=camX+xp;ny=camY+yp;}
@@ -251,7 +274,7 @@ void Command(string cmd){
 				cout << "Changed sky color to: {" << r << "," << g << "," << b << "}\n";
 			}
 		}
-		else if(smode=="grad"){
+		else if(smode=="gradient"){
 			int r1,g1,b1; cin >> r1 >> g1 >> b1;
 			int r2,g2,b2; cin >> r2 >> g2 >> b2;
 			if(!ColVal(r1,g1,b1)||!ColVal(r2,g2,b2)) cout << "Invalid RGB values!\n";
@@ -353,6 +376,13 @@ int main(){
 	inStr = "Input\\input6.bmp";
 	outStr = "Output\\output.bmp";
 	screenStr = "Output\\Screenshots\\screenshot";
+	helpStr = "Help\\help.txt";
+	listStr = "Help\\list.txt";
+	
+	Setup(inStr);
+	fov %= 360;
+	mode = 1;
+	camR = 130.0;
 	
 	cout<<" *******       **     **    **   ******      **      ******** ********** ******** *******                        \n";
 	cout<<"/**////**     ****   //**  **   **////**    ****    **////// /////**/// /**///// /**////**       *          *    \n";
@@ -364,12 +394,8 @@ int main(){
 	cout<<"//     // //      //    //      //////  //      // ////////      //     //////// //     //                       \n\n";
 	
 	cout<<"A C++ bitmap raycaster project by Equinox134\n\n";
-	cout<<"Type /help for a list of controls and commands\n\n\n\n";
-	
-	Setup(inStr);
-	fov %= 360;
-	mode = 1;
-	camR = 130.0;
+	cout<<"Type /help for a list of controls and commands\n\n";
+	cout<<"Press x to exit program\n\n\n\n";
 	
 	cout << "X: " << camX << " Y: " << camY << " Rot: " << camR << " FOV: " << fov << "\r";
 	for(ll t=0;;t++){
