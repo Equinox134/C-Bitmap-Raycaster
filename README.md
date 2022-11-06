@@ -2,7 +2,7 @@
 A C++ implementation of a raycaster using bitmap images
 
 ## Overview
-This is a project of creating a raycaster similar to the one used in Wolfenstein 3D. All of the code(main.cpp, bmputil.h) and the folders(input, output, screenshots) must be included in the same relative positions for the code to properly work. Please note that all explenation here assumes your using windows.
+This is a project of creating a raycaster similar to the one used in Wolfenstein 3D. All of the code(main.cpp, bmputil.h) and the folders(input, output, screenshots, etc) must be included in the same relative positions for the code to properly work. Please note that all explenation here assumes your using windows.
 
 ## Input
 The raycaster will draw a 3D environment based on an image hat is pre-drawn.
@@ -33,6 +33,8 @@ Here are all the controls available in the program. Remember to type the control
 * `c`: Enable/disabel noclip, more explanation below
 * `r`: Enable/disable run, more explanation below
 * `f`: Take screenshot, saved in the screenshot folder by default
+* `SPACE`: Turn the camera y 180 degrees
+* `/`: Enable command console, types of commands written below
 * `x`: Exit program
 
 View modes:
@@ -43,6 +45,25 @@ View modes:
 Noclip: By default, you can't walk through walls, however by enabling noclip you can. There will be a small blue square in the bottom-left corner of the output if noclip is enabled.
 
 Run: You move more every step. There will be a small green square in the bottom-left corner if running is enabled.
+
+## Commands
+Here are all the commands in the program. Curly brackets{} mean to type in words, square brackets[] mean to type in numbers. Commands with different modes have the modes listed beneath them.
+* help: prints list of controls
+* list: prints list of commands
+* camloc {mode} [x] [y]: changes camera location, [x] and [y] are floats
+	* add: adds [x], [y] to current cameras x and y positions
+	* set: sets camera positions to ([x], [y])
+* camrot {mode} [r]: changes camera rotation, [r] is a float
+	* add: adds [r] degrees to current camera rotation
+	* set: sets camera rotation to [r] degrees
+* floorcl [r] [g] [b]: change floor color to {[r], [g], [b]}, [r]~[b] are integers
+* skycl {mode} [r1] [g1] [b1] [r2] [g2] [b2]: changes sky color, [r1]~[b2] are integers
+	* solid: sets sky color to {[r1], [g1], [b1]}; [r2], [g2], [b2] are ignored
+	* gradient: sets sky color to a gradient, color changes from {[r1], [g1], [b1]} to {[r2], [g2], [b2]}
+* fov {mode} [f]: changes camera FOV, [f] is an integer
+	* add: adds [f] to current camera FOV
+	* set: sets camera FOV to [f]
+* res [x] [y]: sets output image size to [x] pixels by [y] pixels, [x] and [y] are integers
 
 ## How it Works
 To be added
