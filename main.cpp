@@ -363,7 +363,7 @@ int main(){
 	cout<<"/**   //**/**     /**   /**    //****** /**     /** ********     /**    /********/**   //**     /          /     \n";
 	cout<<"//     // //      //    //      //////  //      // ////////      //     //////// //     //                       \n\n";
 	
-	cout<<"A C++ bitmap raycaster project by gs22123\n\n";
+	cout<<"A C++ bitmap raycaster project by Equinox134\n\n";
 	cout<<"Type /help for a list of controls and commands\n\n\n\n";
 	
 	Setup(inStr);
