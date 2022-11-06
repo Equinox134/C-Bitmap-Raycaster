@@ -57,6 +57,33 @@ class Canvas{
 			}
 		}
 		
+		void Gradient(int xpos, int ypos, int w, int h, Color c1, Color c2){
+			int x1, y1, x2, y2;
+			if(rectMode == 0){
+				x1 = xpos; y1 = ypos;
+				x2 = xpos + w - 1; y2 = ypos + h - 1;
+			}
+			else{
+				x1 = xpos - (w-1)/2; y1 = ypos - (h-1)/2;
+				x2 = x1 + w - 1; y2 = y1 + h - 1;
+			}
+			
+			x1 = max(min(x1,width-1),0); y1 = max(min(y1,height-1),0);
+			x2 = max(min(x2,width-1),0); y2 = max(min(y2,height-1),0);
+			int r1 = (int)c1.r, g1 = (int)c1.g, b1 = (int)c1.b, cr = rectMode;
+			int r2 = (int)c2.r, g2 = (int)c2.g, b2 = (int)c2.b;
+			rectMode = 1;
+			
+			for(int i=y1;i<=y2;i++){
+				int nr = r1 + (int)(1.0*(i-y1)/h*(r2-r1));
+				int ng = g1 + (int)(1.0*(i-y1)/h*(g2-g1));
+				int nb = b1 + (int)(1.0*(i-y1)/h*(b2-b1));
+				rect((x1+x2)/2,i,w,1,{(uni)nr,(uni)ng,(uni)nb});
+			}
+			
+			rectMode = cr;
+		}
+		
 		void Export(string name, string mode = "name"){
 			if(mode=="name") name += ".bmp";
 			file = fopen(name.c_str(),"wb");
