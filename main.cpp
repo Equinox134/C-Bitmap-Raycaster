@@ -218,6 +218,7 @@ void Move(char x){
 		name += ".bmp";
 		canvas.Export(name,"path");
 	}
+	else if(x==' ') camR += 180;
 	else if(x=='x'){
 		cout << camX << " " << camY << " " << camR;
 		exit(0);
