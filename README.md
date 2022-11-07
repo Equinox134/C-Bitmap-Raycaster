@@ -51,17 +51,31 @@ Here are all the commands in the program. Curly brackets{} mean to type in words
 * `help`: prints list of controls
 * `list`: prints list of commands
 * `camloc {mode} [x] [y]`: changes camera location, `[x]` and `[y]` are floats
-	* add: adds `[x]`, `[y]` to current cameras x and y positions
-	* set: sets camera positions to `([x], [y])`
+	* modes:
+		* add: adds `[x]`, `[y]` to current cameras x and y positions
+		* set: sets camera positions to `([x], [y])`
 * `camrot {mode} [r]`: changes camera rotation, `[r]` is a float
-	* add: adds `[r]` degrees to current camera rotation
-	* set: sets camera rotation to `[r]` degrees
+	* modes:
+		* add: adds `[r]` degrees to current camera rotation
+		* set: sets camera rotation to `[r]` degrees
 * `floorcl [r] [g] [b]`: change floor color to `{[r], [g], [b]}`, `[r]`~`[b]` are integers
 * `skycl [r1] [g1] [b1] [r2] [g2] [b2]`: sets sky color to a gradient, color changes from {[r1], [g1], [b1]} to {[r2], [g2], [b2]}, [r1]~[b2] are integers
 * `fov {mode} [f]`: changes camera FOV, `[f]` is an integer
-	* add: adds `[f]` to current camera FOV
-	* set: sets camera FOV to `[f]`
+	* modes:
+		* add: adds `[f]` to current camera FOV
+		* set: sets camera FOV to `[f]`
 * `res [x] [y]`: sets output image size to `[x]` pixels by `[y]` pixels, `[x]` and `[y]` are integers
+* `setval {variable} {mode} [x]`: changes a certain variable, `[x]` is a float
+	* variables:
+		* speed: change speed value
+		* rspeed: change run speed value
+		* rot: change roataion speed
+	* modes:
+		* add: adds `[x]` to the specified variable
+		* mul: multipies `[x]` to the specified variable
+		* set: sets the specified variable to `[x]`
+
+When you inputed a wrong command, type `CTRL` + `z` and continue
 
 ## How it Works
 To be added
