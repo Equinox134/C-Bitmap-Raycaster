@@ -301,8 +301,50 @@ void Command(string cmd){
 			cout << "Changed output resolution to: " << x << " pixels by " << y << " pixels\n";
 		}
 	}
+	else if(cmd=="setval"){
+		string smode,mmode; cin >> smode >> mmode;
+		double val,nv; cin >> val;
+		if(smode=="speed"){
+			if(mmode=="add") nv = speed+val;
+			else if(mmode=="mul") nv = speed*val;
+			else if(mmode=="set") nv = val;
+			else{
+				cout << "Invalid mode inputed!\n";
+				return;
+			}
+			speed = nv;
+			cout << "Changed speed to: " << nv << "\n";
+		}
+		else if(smode=="rspeed"){
+			if(mmode=="add") nv = rspeed+val;
+			else if(mmode=="mul") nv = rspeed*val;
+			else if(mmode=="set") nv = val;
+			else{
+				cout << "Invalid mode inputed!\n";
+				return;
+			}
+			rspeed = nv;
+			cout << "Changed run speed to: " << nv << "\n";
+		}
+		else if(smode=="rot"){
+			if(mmode=="add") nv = rs+val;
+			else if(mmode=="mul") nv = rs*val;
+			else if(mmode=="set") nv = val;
+			else{
+				cout << "Invalid mode inputed!\n";
+				return;
+			}
+			rs = nv;
+			cout << "Changed rotation speed to: " << nv << "\n";
+		}
+		else{
+			cout << "Invalid value name inputed!\n";
+			return;
+		}
+	}
 	else{
 		cout << "Unknown command!\n";
+		cin.ignore(10000);
 	}
 }
 
