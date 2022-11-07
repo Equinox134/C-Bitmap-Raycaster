@@ -16,3 +16,14 @@ fov {mode} [f]: changes camera FOV, [f] is an integer
 	add: adds [f] to current camera FOV
 	set: sets camera FOV to [f]
 res [x] [y]: sets output image size to [x] pixels by [y] pixels, [x] and [y] are integers
+setval {variable} {mode} [x]: changes a certain variable, [x] is a float
+	variables:
+	speed: change speed value
+	rspeed: change run speed value
+	rot: change roataion speed
+	modes:
+	add: adds [x] to the specified variable
+	mul: multipies [x] to the specified variable
+	set: sets the specified variable to [x]
+
+when you inputed a wrong command, type CTRL + z and continue
