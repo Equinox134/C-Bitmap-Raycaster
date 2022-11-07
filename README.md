@@ -59,7 +59,7 @@ Here are all the commands in the program. Curly brackets{} mean to type in words
 		* add: adds `[r]` degrees to current camera rotation
 		* set: sets camera rotation to `[r]` degrees
 * `floorcl [r] [g] [b]`: change floor color to `{[r], [g], [b]}`, `[r]`~`[b]` are integers
-* `skycl [r1] [g1] [b1] [r2] [g2] [b2]`: sets sky color to a gradient, color changes from {[r1], [g1], [b1]} to {[r2], [g2], [b2]}, [r1]~[b2] are integers
+* `skycl [r1] [g1] [b1] [r2] [g2] [b2]`: sets sky color to a gradient, color changes from `{[r1], [g1], [b1]}` to `{[r2], [g2], [b2]}`, `[r1]`~`[b2]` are integers
 * `fov {mode} [f]`: changes camera FOV, `[f]` is an integer
 	* modes:
 		* add: adds `[f]` to current camera FOV
