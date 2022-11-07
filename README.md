@@ -47,7 +47,7 @@ Noclip: By default, you can't walk through walls, however by enabling noclip you
 Run: You move more every step. There will be a small green square in the bottom-left corner if running is enabled.
 
 ## Commands
-Here are all the commands in the program. Curly brackets{} mean to type in words, square brackets[] mean to type in numbers. Commands with different modes have the modes listed beneath them. If you written the mode a wrong way, type any key the number of parameters written after the mode name. This should make everything work normaly.
+Here are all the commands in the program. Curly brackets{} mean to type in words, square brackets[] mean to type in numbers. Commands with different modes have the modes listed beneath them.
 * `help`: prints list of controls
 * `list`: prints list of commands
 * `camloc {mode} [x] [y]`: changes camera location, `[x]` and `[y]` are floats
@@ -57,9 +57,7 @@ Here are all the commands in the program. Curly brackets{} mean to type in words
 	* add: adds `[r]` degrees to current camera rotation
 	* set: sets camera rotation to `[r]` degrees
 * `floorcl [r] [g] [b]`: change floor color to `{[r], [g], [b]}`, `[r]`~`[b]` are integers
-* `skycl {mode} [r1] [g1] [b1] [r2] [g2] [b2]`: changes sky color, `[r1]`~`[b2]` are integers
-	* solid: sets sky color to `{[r1], [g1], [b1]}`; do not input `[r2]`~`[b2]`
-	* gradient: sets sky color to a gradient, color changes from `{[r1], [g1], [b1]}` to `{[r2], [g2], [b2]}`
+* `skycl [r1] [g1] [b1] [r2] [g2] [b2]`: sets sky color to a gradient, color changes from {[r1], [g1], [b1]} to {[r2], [g2], [b2]}, [r1]~[b2] are integers
 * `fov {mode} [f]`: changes camera FOV, `[f]` is an integer
 	* add: adds `[f]` to current camera FOV
 	* set: sets camera FOV to `[f]`
