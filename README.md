@@ -35,6 +35,7 @@ Here are all the controls available in the program. Remember to type the control
 * `f`: Take screenshot, saved in the screenshot folder by default
 * `SPACE`: Turn the camera y 180 degrees
 * `/`: Enable command console, types of commands written below
+* `k`: Enable/disable fisheye lens, more explanation below
 * `x`: Exit program
 
 View modes:
@@ -45,6 +46,8 @@ View modes:
 Noclip: By default, you can't walk through walls, however by enabling noclip you can. There will be a small blue square in the bottom-left corner of the output if noclip is enabled.
 
 Run: You move more every step. There will be a small green square in the bottom-left corner if running is enabled.
+
+Fisheye Lens: The camera view is changed to have/not have the fisheye lens effect. There will be a small red square in the bottom-left corner if it is enabled.
 
 ## Commands
 Here are all the commands in the program. Curly brackets{} mean to type in words, square brackets[] mean to type in numbers. Commands with different modes have the modes listed beneath them.
