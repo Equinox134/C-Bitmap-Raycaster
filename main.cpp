@@ -15,8 +15,8 @@ typedef unsigned char uni;
 
 ll w, h, outW = 1000, outH = 1000;
 double camX, camY, camR = 0.0, speed = 1, rspeed = 2, rs = 5, darkr = 0.7;
-int fov = 60, mode = 1, noClip = 0, run = 0;
-Color flCol = {(uni)0,(uni)240,(uni)0};
+int fov = 60, mode = 1, noClip = 0, run = 0, feye = 0;
+Color flCol = {(uni)150,(uni)150,(uni)150};
 Color sbCol = {(uni)66,(uni)225,(uni)255}, stCol = {(uni)255,(uni)255,(uni)255};
 vector<vector<int> > board;
 vector<vector<Color> > colData;
@@ -112,7 +112,7 @@ vector<Ray> Raycast(){
 		
 		if(side == 0) dist = sideX - deltaX;
 		else dist = sideY - deltaY;
-		dist *= cos(abs(t)*PI/180);
+		if(feye == 0) dist *= cos(abs(t)*PI/180);
 		
 		//cout << (int)bc.r << (int)bc.g << (int)bc.b << "\n";
 		
@@ -171,6 +171,7 @@ void Draw(){
 	RectMode("ALIGN");
 	if(noClip) canvas.rect(1,1,50,50,{0,(uni)100,(uni)255});
 	if(run) canvas.rect(60,1,50,50,{0,(uni)255,0});
+	if(feye) canvas.rect(120,1,50,50,{(uni)255,0,0});
 	
 	canvas.Export(outStr,"path");
 }
@@ -401,6 +402,7 @@ void Move(char x){
 		string cmd; cin >> cmd;
 		Command(cmd);
 	}
+	else if(x=='k') feye = !feye;
 	else if(x=='x'){
 		exit(0);
 	}
