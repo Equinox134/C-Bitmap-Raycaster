@@ -8,4 +8,5 @@ r: enable/disable run
 f: take screenshot
 SPACE: turn camera by 180 degrees
 /: enable command console, type /list for a list of commands
+k: enable/disable fisheye lens
 x: exit program
