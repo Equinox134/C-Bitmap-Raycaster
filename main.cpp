@@ -15,12 +15,12 @@ typedef unsigned char uni;
 
 ll w, h, outW = 1000, outH = 1000;
 double camX, camY, camR = 0.0, speed = 1, rspeed = 2, rs = 5, darkr = 0.7;
-int fov = 60, mode = 1, noClip = 0, run = 0, feye = 0;
+int fov = 60, mode = 1, noClip = 0, run = 0, feye = 0, rec = 0, fnum = 0;
 Color flCol = {(uni)150,(uni)150,(uni)150};
 Color sbCol = {(uni)66,(uni)225,(uni)255}, stCol = {(uni)255,(uni)255,(uni)255};
 vector<vector<int> > board;
 vector<vector<Color> > colData;
-string inStr, outStr, screenStr, helpStr, listStr;
+string inStr, outStr, screenStr, helpStr, listStr, recStr;
 
 Canvas canvas = Canvas(100,100);
 
@@ -403,6 +403,10 @@ void Move(char x){
 		Command(cmd);
 	}
 	else if(x=='k') feye = !feye;
+	else if(x=='R'){
+		rec = !rec;
+		if(rec == 0) fnum = 0;
+	}
 	else if(x=='x'){
 		exit(0);
 	}
@@ -412,6 +416,7 @@ int main(){
 	inStr = "Input\\input6.bmp";
 	outStr = "Output\\output.bmp";
 	screenStr = "Output\\Screenshots\\screenshot";
+	recStr = "Output\\Record\\";
 	helpStr = "Help\\help.txt";
 	listStr = "Help\\list.txt";
 	
@@ -440,6 +445,13 @@ int main(){
 		Move(x);
 		
 		cout.precision(2); cout << fixed;
-		cout << "X: " << camX << " Y: " << camY << " Rot: " << camR << " FOV: " << fov << "\r";
+		cout << "X: " << camX << " Y: " << camY << " Rot: " << camR << " FOV: " << fov;
+		if(rec){
+			cout << " Recording";
+			string name = recStr + to_string(fnum) + ".bmp";
+			canvas.Export(name,"path");
+			fnum++;
+		}
+		cout << "\r";
 	}
 }
