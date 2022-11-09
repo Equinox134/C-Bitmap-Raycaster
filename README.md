@@ -36,6 +36,7 @@ Here are all the controls available in the program. Remember to type the control
 * `SPACE`: Turn the camera y 180 degrees
 * `/`: Enable command console, types of commands written below
 * `k`: Enable/disable fisheye lens, more explanation below
+* `SHIFT` + `r`: Start recording; screenshots are taken automaticaly for every move
 * `x`: Exit program
 
 View modes:
