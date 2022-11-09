@@ -9,4 +9,5 @@ f: take screenshot
 SPACE: turn camera by 180 degrees
 /: enable command console, type /list for a list of commands
 k: enable/disable fisheye lens
+SHIFT + r: start recording; screenshots are automaticaly taken for every move
 x: exit program
